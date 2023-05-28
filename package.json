@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node src/server.ts",
+    "start": "ts-node-dev src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev src/server.ts"
   },
