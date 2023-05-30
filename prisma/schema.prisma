@@ -10,42 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// criar uma migration: yarn prisma migrate dev
 model User {
   id String @id @default(uuid())
   name String
   email String
   password String
   created_at DateTime? @default(now())
-  update_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
 
   @@map("users")
 }
 
-model Category {
+model Category{
   id String @id @default(uuid())
   name String
-  craeted_at DateTime? @default(now())
-  update_at DateTime? @default(now())
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
 
-
-  @@map("category")
+  @@map("categories")
   products Product[]
 }
 
-
-model Product {
+model Product{
   id String @id @default(uuid())
   name String
   price String
   description String
   banner String
-  craeted_at DateTime? @default(now())
-  update_at DateTime? @default(now())
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
 
   category Category @relation(fields: [category_id], references: [id])
+
   @@map("products")
   category_id String
-  item Item[]
+  items Item[]
 }
 
 model Order{
@@ -55,24 +55,25 @@ model Order{
   draft Boolean @default(true)
   name String?
 
-  craeted_at DateTime? @default(now())
-  update_at DateTime? @default(now())
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
 
   @@map("orders")
   items Item[]
 }
 
-model Item {
+model Item{
   id String @id @default(uuid())
   amount Int
 
-  craeted_at DateTime? @default(now())
-  update_at DateTime? @default(now())
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
 
   order Order @relation(fields: [order_id], references: [id])
-  product Product @relation(fields: [product_id],references: [id])
+  product Product @relation(fields: [product_id], references: [id])
 
   @@map("items")
   order_id String
   product_id String
+
 }
